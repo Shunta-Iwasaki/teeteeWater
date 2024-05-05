@@ -1,0 +1,1417 @@
+$mainColor: #FFCAFA;
+$subColor: #4CBFFF;
+$textLarge: 56px;
+$textMedium: 48px;
+$textSmall: 40px;
+
+$width: 100vw;
+
+@import './mixin';
+@font-face {
+    font-family: "KaiseiDecol-Regular";
+    src: url("../font/KaiseiDecol-Regular.woff") format("woff"), url("../font/KaiseiDecol-Regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "KaiseiDecol-Bold";
+    src: url("../font/KaiseiDecol-Bold.woff") format("woff"), url("../font/KaiseiDecol-Bold.woff2") format("woff2");
+}
+html {
+    font-family: "KaiseiDecol-Regular";
+    font-size: $textSmall;
+    scroll-behavior: smooth;
+    @include tab {
+        font-size: 30px;
+    }
+    @include sp {
+        font-size: 16px;
+    }
+}
+
+body {
+    background-color: $subColor;
+}
+
+h2 {
+    font-weight: normal;
+    @include tab {
+        font-size: 38px;
+    }
+    @include sp {
+        font-size: 26px;
+    }
+}
+
+.text-large {
+    font-size: $textLarge;
+}
+
+.pink_text {
+    filter: drop-shadow(0px 4px 24px rgb(255,202,250,1));
+}
+
+.pc {
+    display: block;
+    @include tab {
+        display: none;
+    }
+    @include sp {
+        display: none;
+    }
+}
+
+.tab {
+    display: none;
+    @include tab {
+        display: block;
+    }
+    @include sp {
+        display: none;
+    }
+}
+
+.sp {
+    display: none;
+    @include tab {
+        display: none;
+    }
+    @include sp {
+        display: block;
+    }
+}
+
+@keyframes balloonAnimation {
+    0% {
+        opacity: 1;
+        transform: rotate(-10deg) translateY(-10px);
+    }
+    50% {
+        transform: rotate(-10deg) translateX(5px) translateY(10px);
+    }
+    100% {
+        transform: rotate(-10deg) translateX(0px) translateY(0px);
+    }
+}
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes infinity-scroll-left {
+    from {
+      transform: translateX(0);
+    }
+      to {
+      transform: translateX(-100%);
+    }
+}
+@keyframes infinity-scroll-right {
+    from {
+      transform: translateX(calc(-100% + 100vw));
+    }
+      to {
+      transform: translateX(0);
+    }
+}
+.balloonAnimation {
+    animation-name: balloonAnimation;
+    animation-duration: 0.2s;
+    opacity: 1 !important;
+}
+.fadeInAnimation {
+    animation: fadeInAnimation 1s forwards;
+}
+.menu {
+    width: 90vw;
+    max-width: 500px;
+    height: 90vh;
+    position: fixed;
+    top: 5vh;
+    background-color: #69caff;
+    z-index: 999;
+    right: -120%;
+    text-align: center;
+    border-radius: 20px 0 0 20px;
+    border: solid 2px #ff86f3;
+    border-right: none;
+    filter: drop-shadow(-10px 0 10px rgb(255, 255, 255));
+    background-image: url(../img/background_dot_white_menu.svg);
+    &::before {
+        content: "";
+        border: solid 20px #FFB4F8;
+        position: absolute;
+        top: -22px;
+        left: -22px;
+        width: calc(100% + 44px);
+        height: calc(100% + 44px);
+        border-radius: 40px 0 0 40px;
+    }
+    &::after {
+        content: "";
+        border: solid 2px #ff86f3;
+        position: absolute;
+        top: -22px;
+        left: -22px;
+        width: calc(100% + 44px);
+        height: calc(100% + 44px);
+        border-radius: 40px 0 0 40px;
+    }
+    ul {
+        margin-top: 40px;
+        z-index: 1000;
+        position: relative;
+    }
+    li {
+        margin-bottom: 6px;
+        list-style-type: none;
+        transition: transform 0.1s ease-in-out;
+        z-index: 1000;
+        &:hover {
+            transform: translate(2px,2px);
+        }
+    }
+    a {
+        font-size: 24px;
+        color: #ffffff;
+        text-decoration: none;
+        img {
+            width: 80%;
+        }
+    }
+    .square_btn {
+        display: block;
+        position: relative;
+        margin-left: auto;
+        transform: translate(-10px,10px);
+        width: 50px;
+        height: 50px;
+        background: #FFB4F8; /* ボタンの背景色 */
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out;
+        z-index: 1000;
+        &:hover {
+            transform: translate(-8px,12px);
+        }
+    }
+    
+    .square_btn::before, .square_btn::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 30px;
+        background: #fff; /* バツ印の色 */
+    }
+    
+    .square_btn::before {
+        transform: translate(-50%,-50%) rotate(45deg);
+    }
+    
+    .square_btn::after {
+        transform: translate(-50%,-50%) rotate(-45deg);
+    }
+}
+.menu-animation-show {
+    animation: menuAnimation-show 1s forwards;
+}
+@keyframes menuAnimation-show {
+    to {
+        right: 0%;
+    }
+}
+.menu-animation-hide {
+    animation: menuAnimation-hide 1s forwards;
+}
+@keyframes menuAnimation-hide {
+    from {
+        right: 0%;
+    }
+    to {
+        right: -120%;
+    }
+}
+// ヘッダー
+.page-header {
+    &__frame {
+        display: flex;
+        margin: 1rem auto 0 auto;
+        width: 90vw;
+        position: relative;
+        @include sp {
+            width: 95vw;
+        }
+        &__logo {
+            position: absolute;
+            left: -1rem;
+            top: -0.5rem;
+            z-index: 100;
+            img {
+                width: 10vw;
+                min-width: 100px;
+                @include sp {
+                    position: absolute;
+                    left: 1vh;
+                    width: 20vw;
+                }
+            }
+            &:hover {
+                transform: translate(2px, 2px);
+                opacity: 0.9;
+            }
+        }
+        &__left, &__right {
+            z-index: 30;
+            height: 90vh;
+            @include sp {
+                height: 95vh;
+            }
+            img {
+                height: 100%;
+            }
+        }
+        &__center {
+            z-index: 30;
+            height: 90vh;
+            width: auto;
+            img {
+                height: 100%;
+                width: 100%;
+                -o-object-fit: cover;
+                object-fit: cover;
+                @include sp {
+                    height: 95vh;
+                }
+            }
+        }
+        &__character {
+            position: absolute;
+            z-index: 20;
+            width: 90vw;
+            height: 90vh;
+            @include sp {
+                display: none;
+            }
+            &__character {
+                position: absolute;
+                display: flex;
+                z-index: 21;
+                height: 35vw;
+                max-height: 55%;
+                transform: translate(-1.5vw, -1vh);
+                bottom: 0.25%;
+                right: 0.25%;
+                @include tab {
+                    bottom: 1%;
+                    right: 1%;
+                }
+            }
+            &__frame {
+                position: absolute;
+                height: 40vw;
+                max-height: 60%;
+                bottom: 0.25%;
+                right: 0.25%;
+                @include tab {
+                    bottom: 1%;
+                    right: 1%;
+                }
+            }
+        }
+        &__impact {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            img {
+                display: flex;
+                width: 97%;
+                height: 97%;
+                margin: 0.5% auto 0;
+            }
+        }
+    }
+    &__content {
+        height: 90vh;
+        width: 90vw;
+        margin: -90vh auto 0 auto;
+        display: flex;
+        flex-direction: column;
+        &__product-logo {
+            display: flex;
+            margin: 20px auto 0 auto;
+            z-index: 99;
+            @include sp {
+                margin-top: 0;
+            }
+            img {
+                height: 25vh;
+                @include sp {
+                    height: 20vh;
+                    max-height: 115px;
+                }
+            }
+        }
+        &__product {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            @include sp {
+                margin-top: 2vh;
+            }
+            img {
+                height: 40vh;
+            }
+        }
+        &__scroll {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 15vh;
+            z-index: 40;
+            display: flex;
+            z-index: 99;
+            @include sp {
+                bottom: 10vh;
+            }
+            &__blur {
+                height: 10vh;
+                max-height: 80px;
+                width: 640px;
+                background-color: #ffffff;
+                border-radius: 20px;
+                -ms-filter: blur(6px);
+                filter: blur(6px);
+                @include tab {
+                    width: 70vw;
+                    height: 9vh;
+                    max-width: 540px;
+                }
+                @include sp {
+                    width: 70vw;
+                    height: 6vh;
+                }
+            }
+            img {
+                position: absolute;
+                height: 10vh;
+                max-height: 80px;
+                width: 600px;
+                left: 50%;
+                transform: translate(-50%, 0);
+                @include tab {
+                    width: 60vw;
+                    height: 8vh;
+                    max-width: 500px;
+                }
+                @include sp {
+                    width: 60vw;
+                    height: 6vh;
+                }
+            }
+        }
+    }
+}
+.background-color {
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(255,134,243,1) 0%, rgba(255,202,250,1) 100%);
+    position: absolute;
+    height: 50vh;
+    width: 100vw;
+    transform: translate(0,-50vh);
+    z-index: -1;
+    border-top: 4px solid #000000;
+}
+.shout-balloon {
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    z-index: 90;
+    img {
+        position: absolute;
+    }
+    &--height {
+        height: 36vh;
+        opacity: 0;
+        @include tab {
+            height: 30vh;
+        }
+        @include sp {
+            height: 25vh;
+        }
+    }
+    &--width {
+        width: 20vw;
+        opacity: 0;
+        @include tab {
+            width: 30vw;
+        }
+        @include sp {
+            width: 40vw;
+        }
+    }
+}
+.menu-bar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1vw;
+    z-index: 999;
+    img {
+        height: 30vh;
+        max-height: 200px;
+        @include sp {
+            height: 20vh;
+        }
+    }
+    &:hover {
+        transform: translate(2px,-49%);
+        cursor: pointer;
+    }
+}
+// メインコンテンツ
+.main-content {
+    background-color: $mainColor;
+    // 商品説明
+    &__introduction {
+        text-align: center;
+        padding-top: 80px;
+        @include sp {
+            padding-top: 200px;
+        }
+        &__balloon {
+            height: 500px;
+            width: 80vw;
+            position: relative;
+            text-align: left;
+            transform: rotate(-10deg);
+            margin-left: 2vw;
+            z-index: 10;
+            opacity: 0;
+            @include tab {
+                height: 320px;
+                width: 500px;
+            }
+            @include sp {
+                transform: translateY(-130px) rotate(0deg);
+                height: 180px;
+                width: 300px;
+                margin: 0 auto;
+            }
+            &__balloon {
+                position: absolute;
+                img {
+                    width: 750px;
+                    @include tab {
+                        width: 500px;
+                    }
+                    @include sp {
+                        width: 300px;
+                    }
+                }
+            }
+            &__text {
+                display: flex;
+                position: absolute;
+                align-items: flex-end;
+                left: 130px;
+                top: 150px;
+                @include tab {
+                    left: 80px;
+                    top: 95px;
+                }
+                @include sp {
+                    left: 50px;
+                    top: 60px;
+                }
+                img {
+                    width: 300px;
+                    @include tab {
+                        width: 220px;
+                    }
+                    @include sp {
+                        width: 130px;
+                    }
+                }
+                p {
+                    position: relative;
+                    left: -10px;
+                }
+            }
+        }
+        &__content {
+            position: relative;
+            margin-top: -170px;
+            height: 1200px;
+            background-image: url(../img/background_introduction.svg);
+            background-size: cover;
+            @include tab {
+                height: 850px;
+            }
+            @include sp {
+                height: 420px;
+            }
+            &__header {
+                width: 100vw;
+            }
+            &__title {
+                margin-top: -10px;
+                padding-top: 160px;
+                @include tab {
+                    padding-top: 180px;
+                }
+                @include sp {
+                    margin-top: 0px;
+                    padding-top: 50px;
+                }
+                img {
+                    max-width: 850px;
+                    width: 50vw;
+                    @include tab {
+                        max-width: 500px;
+                        width: 75vw;
+                    }
+                    @include sp {
+                        width: 270px;
+                    }
+                }
+            }
+            &__bubble {
+                position: absolute;
+                width: 100vw;
+                @include tab {
+                    zoom: 1;
+                }
+                @include sp {
+                    zoom: 1;
+                }
+                & img:first-child {
+                    position: absolute;
+                    left: 20px;
+                    @include tab {
+                        zoom: 0.5;
+                        top: -230px;
+                    }
+                    @include sp {
+                        zoom: 0.25;
+                        top: -230px;
+                    }
+                }
+                & img:last-child {
+                    position: absolute;
+                    right: 20px;
+                    top: -540px;
+                    @include tab {
+                        zoom: 0.4;
+                        top: -580px;
+                    }
+                    @include sp {
+                        zoom: 0.2;
+                        top: -400px;
+                    }
+                }
+            }
+            &__info {
+                width: 80vw;
+                max-width: 1050px;
+                margin: 40px auto 0;
+                text-align: left;
+                @include tab {
+                    width: 95vw;
+                    margin-top: 10px;
+                }
+                @include sp {
+                    width: 95vw;
+                    margin-top: 10px;
+                }
+                p {
+                    margin: 0 auto;
+                    width: 81%;
+                    @include tab {
+                        font-size: 28px;
+                        width: 100%;
+                        text-align: center;
+                    }
+                    @include sp {
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+                &__pic {
+                    display: flex;
+                    @include tab {
+                        margin-top: 20px;
+                    }
+                    @include sp {
+                        margin-top: 10px;
+                    }
+                    & img:first-child, & img:last-child {
+                        z-index: 100;
+                        height: 450px;
+                        @include tab {
+                            height: 250px;
+                        }
+                    }
+                    & img:first-child {
+                        @include sp {
+                            display: none;
+                        }
+                    }
+                    & img:last-child {
+                        @include tab {
+                            margin: 0 auto;
+                        }
+                        @include sp {
+                            height: 150px;
+                            margin: 0 auto;
+                        }
+                    }
+                }
+            }
+            &__bottom {
+                width: 100vw;
+                transform: translateY(-60px);
+                @include sp {
+                    transform: translateY(0px);
+                }
+            }
+        }
+    }
+
+    // 購入方法
+    &__how-to {
+        margin-top: 50px;
+        @include sp {
+            margin-top: 70px;
+        }
+        &__balloon {
+            height: 500px;
+            width: 80vw;
+            position: relative;
+            text-align: left;
+            transform: rotate(-10deg);
+            margin-left: 2vw;
+            z-index: 11;
+            opacity: 0;
+            @include sp {
+                transform: rotate(0deg);
+                height: 180px;
+                width: 300px;
+                margin: 0 auto;
+            }
+            &__balloon {
+                position: absolute;
+                img {
+                    width: 750px;
+                    @include tab {
+                        width: 500px;
+                    }
+                    @include sp {
+                        width: 300px;
+                    }
+                }
+            }
+            &__text {
+                position: absolute;
+                align-items: flex-end;
+                left: 170px;
+                top: 115px;
+                font-size: 48px;
+                @include tab {
+                    left: 112px;
+                    top: 82px;
+                }
+                @include sp {
+                    left: 62px;
+                    top: 47px;
+                }
+                &__buy {
+                    display: flex;
+                    margin-left: 100px;
+                    @include tab {
+                        margin-left: 70px;
+                    }
+                    @include sp {
+                        margin-left: 40px;
+                    }
+                    img {
+                        width: 150px;
+                        @include tab {
+                            width: 120px;
+                        }
+                        @include sp {
+                            width: 75px;
+                        }
+                    }
+                    p {
+                        position: relative;
+                        margin-left: 5px;
+                        @include sp {
+                            margin-top: 5px;
+                        }
+                    }
+                }
+            }
+        }
+        &__frame {
+            display: flex;
+            justify-content: center;
+            margin: -780px auto 0 auto;
+            width: 90vw;
+            position: relative;
+            @include tab {
+                display: none;
+            }
+            @include sp {
+                display: none;
+            }
+            &__left, &__right {
+                z-index: 10;
+                img {
+                    height: 750px;
+                }
+            }
+            &__center {
+                z-index: 10;
+                img {
+                    height: 750px;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        &__content {
+            height: 750px;
+            position: relative;
+            margin-top: -40px;
+            z-index: 11;
+            @include tab {
+                height: 760px;
+                background-color: #ffffff;
+                margin: 0 6%;
+                border-radius: 20px;
+                border: solid 10px #FFB4F8;
+                position: relative;
+            }
+            @include sp {
+                height: 760px;
+                background-color: #ffffff;
+                margin: 0 6%;
+                border-radius: 20px;
+                border: solid 10px #FFB4F8;
+                position: relative;
+            }
+            &::before {
+                @include tab {
+                    content: "";
+                    border: solid 10px #FFDEFC;
+                    position: absolute;
+                    top: -20px;
+                    left: -20px;
+                    width: calc(100% + 40px);
+                    height: calc(100% + 40px);
+                    border-radius: 30px;
+                }
+                @include sp {
+                    content: "";
+                    border: solid 10px #FFDEFC;
+                    position: absolute;
+                    top: -20px;
+                    left: -20px;
+                    width: calc(100% + 40px);
+                    height: calc(100% + 40px);
+                    border-radius: 30px;
+                }
+            }
+            &__step-one, &__step-two, &__step-three {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 0 auto;
+                font-size: 40px;
+                height: 30%;
+                text-align: center;
+                @include tab {
+                    display: block;
+                    font-size: 28px;
+                    margin-top: 16px;
+                }
+                @include sp {
+                    display: block;
+                    font-size: 16px;
+                    margin-top: 16px;
+                }
+            }
+            &__step-one__fan, &__step-two__fan, &__step-three__fan {
+                height: 120px;
+                filter: drop-shadow(6px 4px 4px rgb(0,0,0,0.25));
+            }
+            &__step-one__text, &__step-two__text, &__step-three__text {
+                display: none;
+                @include tab {
+                    display: inline-block;
+                    width: 44px;
+                    height: 44px;
+                    font-size: 26px;
+                    font-weight: bold;
+                    color: #ffffff;
+                    background-color: #FFCAFA;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 44px;
+                    border: solid 1px #fcb3f4;
+                    filter: drop-shadow(4px 3px 0px rgb(255, 185, 248));
+                    transform: translateX(-34vw);
+                }
+                @include sp {
+                    display: inline-block;
+                    width: 44px;
+                    height: 44px;
+                    font-size: 30px;
+                    font-weight: bold;
+                    color: #ffffff;
+                    background-color: #FFCAFA;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 44px;
+                    border: solid 1px #fcb3f4;
+                    filter: drop-shadow(4px 3px 0px rgb(255, 185, 248));
+                    transform: translateX(-34vw);
+                }
+            }
+            &__step-one {
+                width: 80vw;
+                @include sp {
+                    height: 220px;
+                }
+                &__character {
+                    width: 16%;
+                    height: auto;
+                    padding-top: 14px;
+                    @include tab {
+                        width: 130px;
+                        display: flex;
+                        margin-left: auto;
+                    }
+                    @include sp {
+                        width: 130px;
+                        display: flex;
+                        margin-left: auto;
+                    }
+                }
+            }
+            &__step-two {
+                width: 78vw;
+                @include sp {
+                    width: 80vw;
+                }
+                &__character {
+                    width: 12%;
+                    height: auto;
+                    @include tab {
+                        width: 100px;
+                        display: flex;
+                        margin-left: auto;
+                        transform: translateY(-10px);
+                    }
+                    @include sp {
+                        width: 100px;
+                        display: flex;
+                        margin-left: auto;
+                        transform: translateY(-10px);
+                    }
+                }
+            }
+            &__step-three {
+                width: 75vw;
+                @include sp {
+                    width: 80vw;
+                    margin-top: 20px;
+                }
+                &__character {
+                    width: 18%;
+                    height: auto;
+                    @include tab {
+                        width: 130px;
+                        display: flex;
+                        margin-left: auto;
+                        margin-top: 10px;
+                    }
+                    @include sp {
+                        width: 130px;
+                        display: flex;
+                        margin-left: auto;
+                        margin-top: 10px;
+                    }
+                }
+            }
+            &__line {
+                display: flex;
+                margin: -10px auto 0 auto;
+                max-width: 70vw;
+                @include sp {
+                    margin: -10px auto 0 auto;
+                }
+            }
+            .line--two {
+                @include sp {
+                    margin: 24px auto 0 auto;
+                }
+            }
+            p {
+                @include sp {
+                    font-size: 18px;
+                    margin-top: 10px;
+                }
+            }
+        }
+        &__note {
+            font-size: 32px;
+            width: 80vw;
+            margin: 0 auto;
+            @include tab {
+                font-size: 28px;
+                width: 90vw;
+                margin: 20px auto 0 auto;
+            }
+            @include sp {
+                font-size: 16px;
+                width: 90vw;
+                margin: 20px auto 0 auto;
+            }
+        }
+    }
+
+    // 値段
+    &__price {
+        background-image: url(../img/background_dot_white.svg);
+        background-size: cover;
+        height: 3100px;
+        margin-top: 90px;
+        @include tab {
+            margin-top: 70px;
+            background-image: url(../img/background_dot_white.svg);
+        }
+        @include sp {
+            height: 1300px;
+            margin-top: 70px;
+            background-image: url(../img/background_dot_white_sp.svg);
+        }
+        &__balloon {
+            height: 500px;
+            width: 80vw;
+            position: relative;
+            text-align: left;
+            transform: rotate(-10deg);
+            margin-left: 2vw;
+            opacity: 0;
+            @include sp {
+                transform: rotate(0deg);
+                height: 180px;
+                width: 300px;
+                margin: 0 auto;
+            }
+            &__balloon {
+                position: absolute;
+                img {
+                    width: 750px;
+                    @include tab {
+                        width: 500px;
+                    }
+                    @include sp {
+                        width: 300px;
+                    }
+                }
+            }
+            &__text {
+                position: absolute;
+                align-items: flex-end;
+                left: 155px;
+                top: 125px;
+                font-size: 40px;
+                @include tab {
+                    left: 95px;
+                    top: 90px;
+                }
+                @include sp {
+                    left: 60px;
+                    top: 48px;
+                }
+                &__buy {
+                    display: flex;
+                    @include sp {
+                        margin-top: -2px;
+                    }
+                    img {
+                        width: 200px;
+                        @include tab {
+                            width: 150px;
+                        }
+                        @include sp {
+                            width: 75px;
+                        }
+                    }
+                    p {
+                        position: relative;
+                        margin-left: 5px;
+                        letter-spacing: -0.25rem;
+                        @include sp {
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+        &__answer {
+            text-align: center;
+            opacity: 0;
+            img {
+                width: 80vw;
+                margin-top: -150px;
+                @include tab {
+                    width: 100vw;
+                    margin-top: -200px;
+                }
+                @include sp {
+                    width: 100vw;
+                    margin-top: 0px;
+                }
+            }
+        }
+        &__size {
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 20px;
+            margin: 0 auto;
+            justify-content: space-between;
+            align-items: center;
+            width: 40vw;
+            border: solid 10px #FFB4F8;
+            font-size: 36px;
+            font-weight: bold;
+            max-width: 760px;
+            margin-top: -50px;
+            padding: 10px 40px;
+            filter: drop-shadow(4px 4px 0px rgb(0,0,0,0.25));
+            @include tab {
+                width: 80vw;
+                padding: 10px;
+                font-size: 30px;
+                margin-top: 20px;
+                border: solid 6px #FFB4F8;
+            }
+            @include sp {
+                width: 80vw;
+                padding: 10px;
+                font-size: 20px;
+                margin-top: 20px;
+                border: solid 6px #FFB4F8;
+            }
+            img {
+                width: 13%;
+            }
+            &::after {
+                border: solid 5px #4682b4;
+            }
+        }
+        &__product {
+            display: flex;
+            width: 85vw;
+            height: 80vh;
+            max-height: 550px;
+            margin: 30px auto 0 auto;
+            justify-content: space-between;
+            filter: drop-shadow(4px 4px 0px rgb(0,0,0,0.25));
+            font-family: "KaiseiDecol-Bold";
+            @include tab {
+                width: 94vw;
+                max-width: 88vw;
+                overflow-x: auto;
+                gap: 10px;
+                height: 450px;
+            }
+            @include sp {
+                width: 94vw;
+                overflow-x: auto;
+                gap: 10px;
+                height: 400px;
+            }
+            &__content {
+                padding: 10px 20px;
+                text-align: center;
+                background-color: #ffffff;
+                border: 10px solid #FFB4F8;
+                border-radius: 30px;
+                width: 27vw;
+                max-width: 350px;
+                height: 550px;
+                font-size: 26px;
+                @include tab {
+                    padding: 10px;
+                    width: 250px;
+                    height: 450px;
+                    flex: 0 0 auto;
+                }
+                @include sp {
+                    width: 250px;
+                    height: 380px;
+                    flex: 0 0 auto;
+                }
+                &__line {
+                    width: 90%;
+                    display: block;
+                    margin: 10px auto 0;
+                    @include sp {
+                        width: 80%;
+                    }
+                }
+                &__picture__small, &__picture__medium, &__picture__large {
+                    filter: drop-shadow(0px 10px 4px rgb(0,0,0,0.50));
+                }
+                &__picture__small {
+                    height: 40%;
+                    margin-top: 24%;
+                    @include sp {
+                        height: 100px;
+                        margin-top: 58px;
+                    }
+                    p {
+                        @include sp {
+                            margin-top: 10px;
+                        }
+                    }
+                }
+                &__picture__medium {
+                    height: 45%;
+                    margin-top: 15%;
+                    @include sp {
+                        height: 125px;
+                        margin-top: 34px;
+                    }
+                }
+                &__picture__large {
+                    height: 50%;
+                    margin-top: 6%;
+                    @include sp {
+                        height: 150px;
+                        margin-top: 10px;
+                    }
+                }
+                &__price {
+                    display: flex;
+                    width: 100%;
+                    align-items: end;
+                    font-size: 26px;
+                    justify-content: center;
+                    margin-top: 5px;
+                    @include sp {
+                        font-size: 20px;
+                    }
+                    img {
+                        width: 40%;
+                        min-width: 50%;
+                        @include sp {
+                            zoom: 0.8;
+                            min-width: inherit;
+                            width: 100px;
+                        }
+                    }
+                    p {
+                        padding-bottom: 2px;
+                    }
+                }
+                &--small-text {
+                    font-size: 0.9em;
+                    letter-spacing: -0.05em;
+                    @include tab {
+                        font-size: 20px;
+                    }
+                    @include sp {
+                        font-size: 16px;
+                    }
+                }
+                &--large-text {
+                    font-size: 1.4em;
+                    margin-left: -4px;
+                    @include tab {
+                        font-size: 30px;
+                    }
+                    @include sp {
+                        font-size: 24px;
+                    }
+                }
+            }
+        }
+        &__cartoon {
+            display: flex;
+            width: 90vw;
+            max-width: 1200px;
+            margin: 0 auto;
+            @include tab {
+                width: 100vw;
+            }
+            @include sp {
+                width: 100vw;
+            }
+        }
+    }
+
+    // 申し込み
+    &__subscription {
+        position: relative;
+        @include tab {
+            height: 490px;
+        }
+        @include sp {
+            height: 490px;
+        }
+        &__pc {
+            height: 1000px;
+            margin: 0 auto;
+            display: flex;
+            position: relative;
+            background-image: url(../img/mask_pink.png);
+            background-position: center;
+            @include tab {
+                height: 500px;
+                background-image: url(../img/mask_pink_sp.png);
+            }
+            @include sp {
+                height: 500px;
+                background-image: url(../img/mask_pink_sp.png);
+            }
+            &__text {
+                display: flex;
+                margin: 0 auto;
+                max-width: 700px;
+                z-index: 10;
+                @include tab {
+                    display: none;
+                }
+                @include sp {
+                    display: none;
+                }
+            }
+            &__heart {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                filter: drop-shadow(5px 5px 5px #aaa);
+                z-index: 20;
+                transition: transform 0.1s ease-in-out;
+                &:hover {
+                    fill: #fb8c00;
+                    transform: translate(-49%, -49%);
+                }
+                @include tab {
+                    width: 200px;
+                }
+                @include sp {
+                    width: 150px;
+                }
+            }
+        }
+        &__flow-text--top, &__flow-text--bottom {
+            display: none;
+            overflow: hidden;
+            height: 100px;
+            // position: absolute;
+            @include tab {
+                display: flex;
+                transform: translateY(60px);
+            }
+            @include sp {
+                display: flex;
+                transform: translateY(100px);
+            }
+            ul {
+                display: flex;
+                list-style: none;
+                padding: 0 10px;
+                animation: infinity-scroll-left 80s infinite linear 0.5s both;
+            }
+            li {
+                img {
+                    @include tab {
+                        width: 500px;
+                    }
+                    @include sp {
+                        width: 400px;
+                    }
+                }
+            }
+        }
+        &__flow-text--bottom {
+            ul {
+                animation: infinity-scroll-right 80s infinite linear 0.5s both;
+            }
+            @include tab {
+                transform: translateY(290px);
+            }
+            @include sp {
+                transform: translateY(270px);
+            }
+        }
+    }
+
+    // SNS
+    &__sns {
+        width: 30vw;
+        margin: 0 auto;
+        padding-bottom: 80px;
+        @include tab {
+            width: 50vw;
+            max-width: 400px;
+        }
+        @include sp {
+            width: 50vw;
+            max-width: 400px;
+        }
+        ul {
+            display: flex;
+            justify-content: space-between;
+            list-style-type: none;
+            img {
+                @include tab {
+                    zoom: 0.75;
+                }
+                @include sp {
+                    zoom: 0.5;
+                }
+            }
+        }
+    }
+}
+
+// フッター
+.footer {
+    width: 100vw;
+    height: 290px;
+    position: relative;
+    background-color: $mainColor;
+    font-size: 0;
+    @include sp {
+        height: 100px;
+    }
+    img {
+        height: 100%;
+        object-fit: cover;
+    }
+    &__background {
+        width: 100%;
+    }
+    &__copy {
+        position: absolute;
+        color: $subColor;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        font-size: $textSmall;
+        @include sp {
+            font-size: 20px;
+        }
+    }
+}
