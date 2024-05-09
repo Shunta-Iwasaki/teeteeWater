@@ -78,7 +78,6 @@ h2 {
         display: block;
     }
 }
-
 @keyframes balloonAnimation {
     0% {
         opacity: 1;
@@ -162,12 +161,14 @@ h2 {
         margin-top: 40px;
         z-index: 1000;
         position: relative;
+        height: 75%;
     }
     li {
         margin-bottom: 6px;
         list-style-type: none;
         transition: transform 0.1s ease-in-out;
         z-index: 1000;
+        height: 25%;
         &:hover {
             transform: translate(2px,2px);
         }
@@ -178,6 +179,8 @@ h2 {
         text-decoration: none;
         img {
             width: 80%;
+            height: 100%;
+            object-fit: contain;
         }
     }
     .square_btn {
@@ -235,6 +238,37 @@ h2 {
     }
 }
 // ヘッダー
+// safariのみ適用
+::-webkit-full-page-media, _:future, :root .page-header__frame__center img {
+    height: 648.890625px;
+}
+::-webkit-full-page-media, _:future, :root .page-header__frame__left img {
+    height: 648.890625px;
+}
+::-webkit-full-page-media, _:future, :root .page-header__frame__right img {
+    height: 648.890625px;
+}
+::-webkit-full-page-media, _:future, :root .page-header__frame__character {
+    height: 648.890625px;
+}
+::-webkit-full-page-media, _:future, :root .page-header__content {
+    height: 648.890625px;
+    margin: -648.890625px auto 0 auto;
+    position: relative;
+}
+::-webkit-full-page-media, _:future, :root .page-header__content__product-logo img {
+    height: 114px;
+}
+::-webkit-full-page-media, _:future, :root .page-header__content__product img {
+    height: 288px;
+}
+::-webkit-full-page-media, _:future, :root .background-color {
+    height: 360px;
+    transform: translate(0, -360px);
+}
+::-webkit-full-page-media, _:future, :root .page-header__content__scroll {
+    bottom: 108px;
+}
 .page-header {
     &__frame {
         display: flex;
@@ -265,20 +299,18 @@ h2 {
         }
         &__left, &__right {
             z-index: 30;
-            height: 90vh;
-            @include sp {
-                height: 95vh;
-            }
             img {
-                height: 100%;
+                height: 90vh;
+                @include sp {
+                    height: 95vh;
+                }
             }
         }
         &__center {
             z-index: 30;
-            height: 90vh;
             width: auto;
             img {
-                height: 100%;
+                height: 90vh;
                 width: 100%;
                 -o-object-fit: cover;
                 object-fit: cover;
@@ -328,7 +360,7 @@ h2 {
             img {
                 display: flex;
                 width: 97%;
-                height: 97%;
+                height: 95%;
                 margin: 0.5% auto 0;
             }
         }
@@ -446,7 +478,7 @@ h2 {
         width: 20vw;
         opacity: 0;
         @include tab {
-            width: 30vw;
+            width: 16vw;
         }
         @include sp {
             width: 40vw;
@@ -642,7 +674,8 @@ h2 {
                 &__pic {
                     display: flex;
                     @include tab {
-                        margin-top: 20px;
+                        width: 60%;
+                        margin: 20px auto 0;
                     }
                     @include sp {
                         margin-top: 10px;
@@ -794,6 +827,8 @@ h2 {
                 border-radius: 20px;
                 border: solid 10px #FFB4F8;
                 position: relative;
+                margin-top: -180px;
+                z-index: 1;
             }
             @include sp {
                 height: 760px;

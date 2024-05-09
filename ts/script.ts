@@ -136,7 +136,8 @@ function main():void {
     let priceBalloon = document.getElementById("priceBalloon");
     let answerBalloon = document.getElementById("answerBalloon");
     // 現在のブラウザの高さを取得
-    const windowHeight = window.innerHeight;          
+    const windowHeight = window.innerHeight;
+
     setTimeout(() => {
         shoutBalloon(1,7);
       
