@@ -144,6 +144,16 @@ function main() {
     let howToBalloon = document.getElementById("howToBalloon");
     let priceBalloon = document.getElementById("priceBalloon");
     let answerBalloon = document.getElementById("answerBalloon");
+    let balloonNumber;
+    let fadeInNumber;
+    if (window.innerWidth < 640) {
+        balloonNumber = 500;
+        fadeInNumber = 300;
+    }
+    else {
+        balloonNumber = 750;
+        fadeInNumber = 500;
+    }
     // 現在のブラウザの高さを取得
     const windowHeight = window.innerHeight;
     setTimeout(() => {
@@ -161,10 +171,10 @@ function main() {
         const targetTop = shoutBalloonId.getBoundingClientRect().top;
         const opacity = 1 - (scrollTop - targetTop) / 1000;
         shoutBalloonId.style.opacity = String(opacity);
-        scrollAddClass(introductionBalloon, windowHeight, 'balloonAnimation', 750);
-        scrollAddClass(howToBalloon, windowHeight, 'balloonAnimation', 750);
-        scrollAddClass(priceBalloon, windowHeight, 'balloonAnimation', 750);
-        scrollAddClass(answerBalloon, windowHeight, 'fadeInAnimation', 500);
+        scrollAddClass(introductionBalloon, windowHeight, 'balloonAnimation', balloonNumber);
+        scrollAddClass(howToBalloon, windowHeight, 'balloonAnimation', balloonNumber);
+        scrollAddClass(priceBalloon, windowHeight, 'balloonAnimation', balloonNumber);
+        scrollAddClass(answerBalloon, windowHeight, 'fadeInAnimation', fadeInNumber);
     });
 }
 main();
